@@ -3,7 +3,7 @@ variable "project_id" {}
 variable "cluster_name" {
   type      = string
   description = "cluster name"
-  default   = "k8s-cluster"
+  default   = "argo-cluster"
 }
 
 variable "region" {

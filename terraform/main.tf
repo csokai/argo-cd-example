@@ -7,7 +7,7 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket = "terraform-backend-<project-id>"
+    bucket = "terraform-backend-argoproject-329412"
     prefix = "argocd-terraform"
   }
 }
@@ -80,18 +80,5 @@ resource "kubectl_manifest" "argocd" {
     ]
     count     = length(data.kubectl_file_documents.argocd.documents)
     yaml_body = element(data.kubectl_file_documents.argocd.documents, count.index)
-    override_namespace = "argocd"
-}
-
-data "kubectl_file_documents" "my-nginx-app" {
-    content = file("../manifests/argocd/my-nginx-app.yaml")
-}
-
-resource "kubectl_manifest" "my-nginx-app" {
-    depends_on = [
-      kubectl_manifest.argocd,
-    ]
-    count     = length(data.kubectl_file_documents.my-nginx-app.documents)
-    yaml_body = element(data.kubectl_file_documents.my-nginx-app.documents, count.index)
     override_namespace = "argocd"
 }
