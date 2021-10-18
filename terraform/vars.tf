@@ -1,4 +1,8 @@
-variable "project_id" {}
+variable "project_id" {
+  type = string
+  description = "projectid"
+  default = 'argoproject-329412'
+}
 
 variable "cluster_name" {
   type      = string
